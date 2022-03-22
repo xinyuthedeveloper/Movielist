@@ -3,6 +3,7 @@ import store from "../../utils/actionCreator";
 import "./index.css";
 
 const SingleMovieView = ({ movie }) => {
+  const { movies } = store.getState();
   const [isBlock, setIsBlock] = useState(movie.isBlock);
   const [isLike, setIsLike] = useState(movie.isLike);
 
@@ -11,23 +12,17 @@ const SingleMovieView = ({ movie }) => {
       setIsBlock(true);
       store.dispatch({
         type: "IS_BLOCK",
-        payload: { ...movie, isBlock: true },
+        payload: { ...movie, isBlock: true, isLike: false },
       });
     }
 
     if (e.target.name === "like") {
-      const isExistInLiked = store
-        .getState()
-        .liked.find((element) => element.id === movie.id);
-
       if (!isLike) {
-        if (!isExistInLiked) {
-          store.dispatch({
-            type: "IS_LIKE",
-            payload: { ...movie, isLike: true },
-          });
-          setIsLike(true);
-        }
+        store.dispatch({
+          type: "IS_LIKE",
+          payload: { ...movie, isLike: true },
+        });
+        setIsLike(true);
       }
     }
   };

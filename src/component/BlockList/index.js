@@ -3,27 +3,27 @@ import store from "../../utils/actionCreator";
 import Detail from "./Detail";
 import "./index.css";
 
-export default function BlockList({ movie, isBlocked }) {
-  const data = store.getState();
-  const [isShow, setIsShow] = useState(isBlocked);
+export default function BlockList({ movie }) {
+  const { movies } = store.getState();
+  const [isShow, setIsShow] = useState(movie.isBlock);
   const [showDetail, setShowDetail] = useState(false);
 
   const buttonsHandler = (event) => {
-    const movieFound = data.find(
-      (element) => element.id === Number(event.target.parentNode.id)
-    );
-    console.log(movieFound);
+    const movieFound = movies.find((element) => element.id === movie.id);
+
     if (event.target.name === "unblock" || event.target.name === "like") {
-      if (event.target.name === "like") {
-        store.dispatch({
-          type: "IS_LIKE",
-          text: movieFound,
-        });
-      }
       store.dispatch({
         type: "UNBLOCK",
-        text: movieFound,
+        payload: { ...movieFound, isBlock: false },
       });
+
+      if (event.target.name === "like") {
+        !movieFound &&
+          store.dispatch({
+            type: "IS_LIKE",
+            payload: { ...movieFound, isLike: true, isBlock: false },
+          });
+      }
       setIsShow(!isShow);
     }
 
@@ -51,7 +51,7 @@ export default function BlockList({ movie, isBlocked }) {
             src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             alt={movie.original_title}
           />
-          <div className="buttons" id={movie.id}>
+          <div className="buttons">
             <button name="unblock">Delete</button>
             <button name="like">Like</button>
             <button name="detail">Detail</button>

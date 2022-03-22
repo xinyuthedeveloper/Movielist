@@ -11,8 +11,6 @@ export default function MovieList() {
   const [loading, setLoading] = useState(false);
   const baseUrl =
     "https://api.themoviedb.org/3/movie/popular?api_key=ec90af707a599c7b1267e264bad8a7b7&language=en-US&page=";
-  const { movies } = store.getState();
-  console.log(movies);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -25,7 +23,7 @@ export default function MovieList() {
           element.isLike = false;
           return element;
         });
-        console.log(modifiedData);
+
         setData([...modifiedData]);
         store.dispatch({ type: "ADD_LIST", payload: modifiedData });
         setLoading(false);
@@ -34,6 +32,9 @@ export default function MovieList() {
         setLoading(false);
       }
     }
+
+    const { movies } = store.getState();
+    console.log(store.getState());
 
     const pageFound = movies.find((element) => element.page == page);
     pageFound

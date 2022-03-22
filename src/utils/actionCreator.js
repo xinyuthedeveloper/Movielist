@@ -2,8 +2,6 @@ import { createStore } from "redux";
 
 const initialState = {
   movies: [],
-  blocked: [],
-  liked: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,27 +20,23 @@ const reducer = (state = initialState, action) => {
       console.log({
         ...state,
         movies: modifiedMovies,
-        liked: [...state.liked, action.payload],
       });
       return {
         ...state,
         movies: modifiedMovies,
-        liked: [...state.liked, action.payload],
       };
+
+    case "UNLIKE":
+      return { ...state, movies: modifiedMovies };
 
     case "IS_BLOCK":
       return {
         ...state,
         movies: modifiedMovies,
-        blocked: [...state.blocked, action.payload],
       };
 
     case "UNBLOCK":
-      const unblockIndex = state.findIndex(
-        (element) => element.id === action.text.id
-      );
-      state[unblockIndex].isBlocked = false;
-      return state;
+      return { ...state, movies: modifiedMovies };
 
     default:
       return state;
