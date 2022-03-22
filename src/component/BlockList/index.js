@@ -18,11 +18,10 @@ export default function BlockList({ movie }) {
       });
 
       if (event.target.name === "like") {
-        !movieFound &&
-          store.dispatch({
-            type: "IS_LIKE",
-            payload: { ...movieFound, isLike: true, isBlock: false },
-          });
+        store.dispatch({
+          type: "IS_LIKE",
+          payload: { ...movieFound, isLike: true, isBlock: false },
+        });
       }
       setIsShow(!isShow);
     }
