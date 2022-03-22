@@ -2,28 +2,40 @@ import { createStore } from "redux";
 
 const initialState = {
   movies: [],
-  block: [],
+  blocked: [],
   liked: [],
 };
 
 const reducer = (state = initialState, action) => {
+  const modifiedMovies = state.movies.map((element) => {
+    if (element.id === action.payload.id) {
+      element = action.payload;
+    }
+    return element;
+  });
+
   switch (action.type) {
     case "ADD_LIST":
       return { ...state, movies: [...state.movies, ...action.payload] };
 
     case "IS_LIKE":
-      const likeIndex = state.findIndex(
-        (element) => element.id === action.text.id
-      );
-      state[likeIndex].isLiked = true;
-      return state;
+      console.log({
+        ...state,
+        movies: modifiedMovies,
+        liked: [...state.liked, action.payload],
+      });
+      return {
+        ...state,
+        movies: modifiedMovies,
+        liked: [...state.liked, action.payload],
+      };
 
     case "IS_BLOCK":
-      const blockIndex = state.findIndex(
-        (element) => element.id === action.text.id
-      );
-      state[blockIndex].isBlocked = true;
-      return state;
+      return {
+        ...state,
+        movies: modifiedMovies,
+        blocked: [...state.blocked, action.payload],
+      };
 
     case "UNBLOCK":
       const unblockIndex = state.findIndex(

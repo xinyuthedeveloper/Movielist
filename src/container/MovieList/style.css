@@ -1,33 +1,15 @@
-.pageSwitch {
-    display:flex;
-    justify-content: space-around;
-    width:100%;
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
-.listView{
-    display:flex;
-    justify-content: space-between;
+
+.toggle-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.movie_element{
-    display:flex;
-    flex-direction: column;
-    width:100%;
-    justify-content: baseline;
-}
-.movie_container{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-.movie_element_pic{
-    height: 500px;
-    width: 300px;
-}
-.movie_layout{
-    display:flex;
-    flex-direction: column;
-    text-align: center;
-    gap:20px;
-    font-size: 1.5em;
-    padding-left: 50px;
-    padding-right: 50px;
+
+.toggle-page button {
+  margin: 10px;
 }

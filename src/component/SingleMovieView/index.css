@@ -1,0 +1,7 @@
+.movie {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 300px;
+  text-align: center;
+}

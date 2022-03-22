@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { useState, useEffect } from "react";
 import store from "../../utils/actionCreator.js";
+import SingleMovieView from "../../component/SingleMovieView";
 
 // [ 'Use Redux', 'Read the docs' ]
 export default function MovieList() {
@@ -12,6 +13,7 @@ export default function MovieList() {
     "https://api.themoviedb.org/3/movie/popular?api_key=ec90af707a599c7b1267e264bad8a7b7&language=en-US&page=";
   const { movies } = store.getState();
   console.log(movies);
+
   useEffect(() => {
     async function fetchMovies() {
       try {
@@ -46,7 +48,9 @@ export default function MovieList() {
       } else {
         setPage(1);
       }
-    } else {
+    }
+
+    if (e.target.name === "next") {
       setPage(page + 1);
     }
   };
@@ -54,14 +58,16 @@ export default function MovieList() {
   return loading ? (
     <h6>loading</h6>
   ) : (
-    <div className="movies">
+    <div className="wrapper">
       <div className="toggle-page" onClick={(e) => pageSwitchHandler(e)}>
         <button name="prev">prev</button>
+        <span>page {page}</span>
         <button name="next">next</button>
       </div>
-      <div className="wrapper">
-        {data.map((element) => {
-          return <li>{element.original_title}</li>;
+
+      <div className="movies-grid">
+        {data.map((movie) => {
+          return <SingleMovieView movie={movie} key={movie.id} />;
         })}
       </div>
     </div>
