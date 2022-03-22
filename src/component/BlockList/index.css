@@ -1,0 +1,34 @@
+.modal-body {
+  text-align: center;
+}
+
+.blocked-grid {
+  display: flex;
+}
+
+.blocked-movie {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper img {
+  transition: 0.5s ease-in-out;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+}
+
+.image-wrapper:hover img {
+  transform: translate(0, -8%);
+}
+
+.image-wrapper:hover .buttons {
+  z-index: 1;
+}
