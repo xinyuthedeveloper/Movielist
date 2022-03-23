@@ -40,6 +40,8 @@ const SingleMovieView = ({ movie }) => {
         <br />
         Score: {movie.vote_average}
         <br />
+        Vote Count: {movie.vote_count}
+        <br />
         {movie.overview}
         <div
           className="buttons-wrapper"

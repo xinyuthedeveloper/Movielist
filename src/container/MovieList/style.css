@@ -13,3 +13,13 @@
 .toggle-page button {
   margin: 10px;
 }
+
+.sort-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.sort-buttons button {
+  padding: 5px;
+  margin: 10px;
+}
